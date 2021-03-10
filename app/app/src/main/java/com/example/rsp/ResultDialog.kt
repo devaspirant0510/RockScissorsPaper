@@ -28,17 +28,22 @@ class ResultDialog(var you: Int) : DialogFragment() {
     }
 
     private fun init(view: View) {
+        // 컴퓨터가 낸값을 랜덤으로 설정
         val comRand = rand(-1,2)
+        // 내가 낸 값과 컴퓨터가 낸값으로 승리여뷰 판단
         val state = check(this.you,comRand)
+        // 결과값을 보여줄 텍스트 뷰 아이디값 연결
         resultTv = view.findViewById<TextView>(R.id.result)
+        // 상태값을 받아와 텍스트 뷰에 적용 -> UI 연결
+        updateStateMessage(state)
+        // 이미지 뷰 적용 -> UI 연결
+        updateUi(view,this.you,comRand)
+
+        // 버튼 눌렀을때 다이얼로그 종료
         val exit:Button = view.findViewById<Button>(R.id.exit)
         exit.setOnClickListener{
             dismiss()
         }
-        updateStateMessage(state)
-
-        updateUi(view,this.you,comRand)
-
 
 
 
@@ -83,17 +88,15 @@ class ResultDialog(var you: Int) : DialogFragment() {
 
         val checkNum:Int = user-com
         Toast.makeText(context,checkNum.toString(),Toast.LENGTH_SHORT).show()
-        if (checkNum==1 && checkNum == -2){
-            return Define.WIN
-        }
-        else{
-            return Define.LOSE
+        return if (checkNum==1 && checkNum == -2){
+            Define.WIN
+        } else{
+            Define.LOSE
         }
 
     }
     private fun rand(start: Int, end: Int) : Int {
         // 기본적으로 nextInt(n) 일경우 0,1,... n-1
-
         return random.nextInt(end - start) + start
     }
 }
