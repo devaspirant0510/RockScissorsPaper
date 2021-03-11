@@ -1,5 +1,6 @@
 package com.example.rsp
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,15 +8,20 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.rsp.R.*
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlin.math.acos
 
-class NameBottomSheet: BottomSheetDialogFragment(){
+class CustomBottomSheet(context: Context): BottomSheetDialogFragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setStyle(DialogFragment.STYLE_NORMAL,R.style.AppBottomSheetDialogTheme)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,10 +36,10 @@ class NameBottomSheet: BottomSheetDialogFragment(){
 
     }
 
-    private fun init(root: View?) {
+    private fun init(root:View) {
         // id 값 연결
-        val confirmBtn = root?.findViewById<Button>(R.id.btn_confirm)
-        val nameEt = root?.findViewById<EditText>(R.id.editText)
+        val confirmBtn = root.findViewById<Button>(R.id.btn_confirm)
+        val nameEt = root.findViewById<EditText>(R.id.editText)
         // 확인버튼을 눌렀을때
         confirmBtn?.setOnClickListener {
             val name:String = nameEt?.text.toString()
@@ -42,6 +48,7 @@ class NameBottomSheet: BottomSheetDialogFragment(){
             bundle.putString("userName",name)
             val fr = RspFragment();
             fr.arguments = bundle
+
             val activity = activity as MainActivity
             // 프레그먼트 트랜잭션
             activity.setFragment(fr)

@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-
     android:background="@drawable/bottom_navi_shape"
+
     android:layout_height="400dp">
 
     <ImageView
@@ -33,13 +33,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="이름을 입력하세요"/>
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_confirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
         android:layout_marginTop="15dp"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
         android:text="확인"/>
 
 </LinearLayout>
